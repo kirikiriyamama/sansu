@@ -1,11 +1,9 @@
 require 'spec_helper'
 
 describe Sansu do
-  it 'has a version number' do
-    expect(Sansu::VERSION).not_to be nil
-  end
-
-  it 'does something useful' do
-    expect(false).to eq(true)
+  describe '.validate' do
+    it { expect{ Sansu.validate([]) }.to raise_error Sansu::Error::NoValuesError }
+    it { expect{ Sansu.validate(['a']) }.to raise_error Sansu::Error::IncludingNonNumericError }
+    it { expect{ Sansu.validate([[]]) }.to raise_error Sansu::Error::IncludingNonNumericError }
   end
 end
